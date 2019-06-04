@@ -42,13 +42,13 @@ De acordo com as configurações, o serviço será exposto na URL http://localho
 ```
 {
 	"email":"exemplo@totvs.com.br",
-	"event":"Palestra",
+	"code_event":"Palestra",
 	"note":5,
 	"description":"Sugestão/critica da palestra"
 }
 ```
 
-* Os campos _email_ e _event_ são do tipo texto (String) e são obrigatórios. 
+* Os campos _email_ e _code___event_ são do tipo texto (String) e são obrigatórios. 
 * O campo _note_ deve conter um número inteiro entre 0 e 5 e não pode ser nulo.
 * Por ultimo, o campo _description_ também é do tipo texto (String) com no máximo 400 caracteres.
 
