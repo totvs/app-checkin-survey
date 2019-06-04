@@ -1,0 +1,29 @@
+**/.attach_pid*
+*.java.hsp
+*.sonarj
+*.sw*
+.DS_Store
+.settings
+.springBeans
+.git
+.metadata
+.settings
+.recommenders
+.factorypath
+# Eclipse artifacts and output dirs
+**/.project
+**/.settings
+**/.classpath
+**/.recommenders
+**/.factorypath
+**/target
+**/bin
+**/.README.md.html
+
+# IDEA artifacts and output dirs
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.idea
+**/out
+**/test-output

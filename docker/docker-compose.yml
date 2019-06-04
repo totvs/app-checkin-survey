@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+
+  checkin-pg-data: {}
+
+services:
+
+  checkin-postgres:
+    container_name: checkin-pg
+    image: sameersbn/postgresql:10-1
+    restart: always
+    environment:
+      DB_NAME: checkin
+      DB_USER: checkin
+      DB_PASS: checkin!123
+      PG_PASSWORD: checkin!123
+    ports:
+      - 5432:5432
+    volumes:
+      - checkin-pg-data:/var/lib/postgresql
