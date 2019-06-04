@@ -50,7 +50,7 @@ public class SurveyService {
 	 * @throws SurveySubmitNonUniqueResultException if survey already exists
 	 */
 	public void addSurvey(SurveyModel dto) {
-		if (!existsSurveyByEmailAndEvent(dto.getEmail(), dto.getEvent())) {
+		if (!existsSurveyByEmailAndEvent(dto.getEmail(), dto.getCode_event())) {
 			repo.saveAndFlush(dto);
 		} else {
 			throw new SurveySubmitNonUniqueResultException(); 
@@ -62,11 +62,11 @@ public class SurveyService {
 	 * Class responsible for verifying that a survey response with this email already exists for the same event.
 	 *
 	 * @param email the email
-	 * @param event the event
+	 * @param code_event the event
 	 * @return false, if it's unique
 	 * @return true, if it exists.
 	 */
-	boolean existsSurveyByEmailAndEvent(String email, String event) {
+	boolean existsSurveyByEmailAndEvent(String email, String code_event) {
 
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
@@ -76,7 +76,7 @@ public class SurveyService {
 		Root<SurveyModel> survey = query.from(SurveyModel.class);
 
 		Predicate emailNamePredicate = criteriaBuilder.equal(survey.get("email"), email);
-		Predicate eventPredicate = criteriaBuilder.equal(survey.get("event"), event);
+		Predicate eventPredicate = criteriaBuilder.equal(survey.get("code_event"), code_event);
 
 		query.where(emailNamePredicate, eventPredicate);
 

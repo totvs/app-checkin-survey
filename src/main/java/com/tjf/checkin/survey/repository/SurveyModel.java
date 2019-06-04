@@ -48,13 +48,13 @@ public class SurveyModel implements Serializable {
 	private String email;
 	
 	/** 
-	 * The event.
+	 * The Code of event.
 	 *  
-	 * Event can't be null.
+	 * Code_event can't be null.
 	 */
 	@NotNull(message = "{SurveyModel.event.NotNull}")
 	@NotBlank(message = "{SurveyModel.event.NotBlank}")
-	private String event;
+	private String code_event;
 	
 	/** 
 	 * The note. 
