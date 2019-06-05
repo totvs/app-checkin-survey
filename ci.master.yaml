@@ -1,0 +1,50 @@
+resources:
+  - repo: self
+queue:
+  name: Framework-Builds
+
+trigger:
+  - master
+
+variables:
+  registry: docker.totvs.io
+  project: 'app-checkin'
+  imageName: 'checkin-survey'
+  tagBuild: '$(Build.BuildNumber)'
+  image: $(registry)/$(project)/$(imageName)
+
+steps:
+  - script: |
+      docker build --no-cache --pull -f Dockerfile -t $(image):$(tagBuild) .
+      docker tag $(image):$(tagBuild) $(image):latest
+    displayName: Build image (TAG and LATEST)
+  - task: Docker@1
+    displayName: 'Push image TAG Build'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: dev.totvs-docker.totvs.io
+      command: 'Push an image'
+      imageName: '$(image):$(tagBuild)'
+      qualifyImageName: false
+
+  - task: Docker@1
+    displayName: 'Push image TAG Latest'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: dev.totvs-docker.totvs.io
+      command: 'Push an image'
+      imageName: '$(image):latest'
+      qualifyImageName: false
+
+  - script: |
+      docker rmi $(image):$(tagBuild)
+      docker rmi $(image):latest
+    displayName: Remove images (TAG and LATEST)
+  - script: "sed -i 's/PLACE_HOLDER_TAG/$(tagBuild)/g' ci.TAG.txt"
+    displayName: 'Replace PLACE_HOLDER_TAG'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: ci.TAG.txt'
+    inputs:
+      PathtoPublish: 'ci.TAG.txt'
+      ArtifactName: 'ci.TAG.txt'
