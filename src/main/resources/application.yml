@@ -1,11 +1,13 @@
-        
 spring:
+  
+  application:
+    name: checkin-survey-service
   
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/checkin
-    username: checkin
-    password: checkin!123
+    url: jdbc:postgresql://${databasesurvey}
+    username: ${usernamesurvey}
+    password: ${passwordsurvey}
 
   jpa:
     open-in-view: false
@@ -22,4 +24,4 @@ spring:
             non_contextual_creation: true # https://github.com/spring-projects/spring-boot/issues/12007
     
 server:
-  port: 8180
+  port: 8080
