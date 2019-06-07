@@ -23,5 +23,15 @@ spring:
           lob:
             non_contextual_creation: true # https://github.com/spring-projects/spring-boot/issues/12007
     
+security:
+  oauth2:
+    resource:
+      id: 'authorization_api'
+      jwk:
+        key-set-uri: https://${urlrac}/totvs.rac/.well-known/openid-configuration/jwks    
+    
+survey:
+  logurl: ${printurl}
+      
 server:
   port: 8080
