@@ -15,49 +15,49 @@ import javax.validation.constraints.Size;
 
 import lombok.Getter;
 
- /**
-  * Survey Entity.
-  *
-  * @author Diego N. da Silveira
-  */
+/**
+ * Survey Entity.
+ *
+ * @author Diego N. da Silveira
+ */
 
 @Getter
 @Entity
-@Table(name="Survey")
+@Table(name = "Survey")
 public class SurveyModel implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7580115485706153959L;
 
-	/** 
-	 * Id. 
+	/**
+	 * Id.
 	 * 
 	 * Unique identifier generated automatically.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	/** 
-	 * The email. 
+
+	/**
+	 * The email.
 	 * 
 	 * Email can't be null.
 	 */
 	@NotNull(message = "{SurveyModel.email.NotNull}")
 	@NotBlank(message = "{SurveyModel.email.NotBlank}")
 	private String email;
-	
-	/** 
+
+	/**
 	 * The Code of event.
-	 *  
+	 * 
 	 * Code_event can't be null.
 	 */
 	@NotNull(message = "{SurveyModel.event.NotNull}")
 	@NotBlank(message = "{SurveyModel.event.NotBlank}")
 	private String code_event;
-	
-	/** 
-	 * The note. 
+
+	/**
+	 * The note.
 	 * 
 	 * Only values ​​between 0 and 5 are allowed. It's not possible to be null.
 	 */
@@ -65,14 +65,18 @@ public class SurveyModel implements Serializable {
 	@Min(value = 0, message = "{SurveyModel.note.MinValue}")
 	@Max(value = 5, message = "{SurveyModel.note.MaxValue}")
 	private Integer note;
-	
-	/** 
-	 * The description. 
+
+	/**
+	 * The description.
 	 * 
 	 * Description must not exceed 400 characters.
 	 */
 	@Size(max = 400, message = "{SurveyModel.description.MaxSize}")
 	private String description;
-	
-}
 
+	@Override
+	public String toString() {
+		return "/email=" + email + ",code_event=" + code_event + ",note=" + note + ",description=" + description;
+	}
+
+}
