@@ -1,5 +1,7 @@
 FROM docker.totvs.io/tjf/maven:3.6.0
 
+RUN apt-get install -y ca-certificates
+
 ADD . /maven-repo
 WORKDIR /maven-repo
 
