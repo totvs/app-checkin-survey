@@ -28,7 +28,7 @@ security:
     resource:
       id: 'authorization_api'
       jwk:
-        key-set-uri: https://${urlrac}/totvs.rac/.well-known/openid-configuration/jwks    
+        key-set-uri: ${urlrac}/.well-known/openid-configuration/jwks    
     
 survey:
   logurl: ${printurl}
